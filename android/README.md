@@ -1,8 +1,18 @@
 # Android Setup: react-native-facebook-login
 
-**Assumptions**
-- You have a [Facebook App Setup](https://developers.facebook.com/quickstarts/?platform=android) (Key Hash, App Id, etc)
-- You installed this module via npm
+** Passo 0 - Configure seu aplicativo do Facebook **
+- Vá até [Facebook App Setup](https://developers.facebook.com/quickstarts/?platform=android) (Key Hash, App Id, etc) 
+e entre com os dados que eles exigem!
+
+PACOTE: veja o pacote do seu aplicativo (basta ver no AndroidManifest)
+CLASSE PRINCIPAL: MainActivity (só o nome da classe principal)
+
+Na hora de gerar os hashes, eles aceitam mais de um, ou seja, o debug e o release. 
+No Windows é necessário instalar o OpenSSL e, no meu caso, ficou assim o comando para gerar para o debug:
+
+```
+keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | "C:\OpenSSL\bin\openssl.exe" sha1 -binary | "C:\OpenSSL\bin\openssl.exe" base64
+```
 
 #### Step 1 - Update Gradle Settings
 
@@ -227,6 +237,14 @@ var LoginBehavior = {
   />
 
 ```
+
+#### Caso apareça o erro de tools:replace, basta fazer o seguinte:
+
+Adicione à tag raiz <manifest> a seguinte propriedade:
+xmlns:tools="http://schemas.android.com/tools"
+
+e assim ele passará a reconhecer as propriedades tools:
+
 
 #### In some cases we were getting the following error when compiling
 
